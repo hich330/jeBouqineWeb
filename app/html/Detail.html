@@ -1,0 +1,94 @@
+﻿<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="Index.html">Accueil</a></li>
+        <li><a href="#/LesLivres/">Littérature</a></li>
+        <li>Titre 1</li>
+    </ol>
+</div>
+<div class="col-md-12 col-md-12">
+    <div class="panel" style="padding: 30px 30px 30px 30px;">
+        <div class="media">
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object thumbnail" src="http://placehold.it/350x500" alt="...">
+                </a>
+            </div>
+            <div class="media-body" style="padding: 30px 30px 30px 30px;">
+                <a [routerLink]="['/LesLivres']" class="btn btn-link"> <i class="fa fa-angle-left" style="margin-right:15px;"></i>Retour</a>
+                <div class="page-header">
+                    <h1> {{Livre.Nom}} </h1>
+                    <small>{{Livre.Auteur}}</small>
+                </div>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="active" href="#Description" data-toggle="tab"><a href="#Description">Description</a></li>
+                        <li><a href="#Carac" data-toggle="tab">Caractéristiques</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane  active" id="Description" style="padding: 20px 30px 30px 5px;">
+                            <p>
+                                {{Livre.Description}}
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="Carac" style="padding: 20px 30px 30px 5px;">
+                            <div class="form-horizontal" role="form">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <label class="col-lg-4 text-right" style="font-weight:bold">ISBN :</label>
+                                        <span class="col-lg-4 text-left"> {{Livre.ISBN}}</span>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <label class="col-lg-4 text-right" style="font-weight:bold">Maison d'édition :</label>
+                                        <span class="col-lg-4 text-left"> {{Livre.MaisonEdition}} </span>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <label class="col-lg-4 text-right" style="font-weight:bold">Nombre Pages :</label>
+                                        <span class="col-lg-4 text-left"> {{Livre.NombrePages}} </span>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <label class="col-lg-4 text-right" style="font-weight:bold">Date Sortie :</label>
+                                        <span class="col-lg-4 text-left"> {{Livre.DateSortie}} </span>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<h4 class="text text-danger">Prix: 55<span class="glyphicon glyphicon-euro"></span></h4>-->
+
+                <div>
+                    <div class="pull-left">
+                        <span class="text-danger" style="font-weight:bold;font-size:18px;">Précommande : </span>
+
+                        <span class="text-danger text-center" style="font-size:35px;">{{Livre.Prix}} TND</span>
+                    </div>
+                    <div class="input-group col-lg-2 pull-right"  *ngIf="LoggedIn">
+                        <input type="number" class="form-control" [value]="Livre.Quantite" (input)="Livre.Quantite = $event.target.value">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" (click)="AjouterLivrePanier(Livre)"><i class="fa fa-cart-plus"></i></button>
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-10 pull-right">
+                <label class="col-lg-3 text-left" style="font-weight:bold">Date derniiére commande :</label>
+                <span class="col-lg-4 text-left">{{Livre.DateDerniereCommande | date:'yyyy-MM-dd à HH:mm'}}</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+     
+<script>
+    $('.nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+</script>
